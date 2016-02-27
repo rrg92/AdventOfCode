@@ -1,0 +1,12 @@
+#Change log!
+
+
+	Version 0
+	
+		- Project created
+		- Files added
+	
+	Version  1.0
+	
+		- Day 1 Solution File added
+		- Start of development of Solution 1
