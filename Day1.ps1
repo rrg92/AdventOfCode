@@ -16,9 +16,14 @@ $InputData = Get-Content Day1INput.txt
 
 $CurrentFloor = 0;
 
-
+#Added to support part 2!
+$FirstBasementPosition = $null;
+$currentPosition = 0;
 
 $InputData.ToCharArray() | %{
+
+	#Added to suport part 2!
+	$currentPosition++;
 
 	#Assume that exists just
 	if($_ -eq "("){
@@ -27,7 +32,13 @@ $InputData.ToCharArray() | %{
 	elseif ($_ -eq ")") {
 		$CurrentFloor--;
 	}
+	
+	#Added to support part 2!
+	if($CurrentFloor -eq -1 -and $FirstBasementPosition -eq $null){
+		$FirstBasementPosition = $currentPosition;
+	}
 
 }
 
-write-host "Floor is: $CurrentFloor"
+write-host "Part 1) Floor is: $CurrentFloor"
+write-host "Part 2) First Basement position is: $FirstBasementPosition";
