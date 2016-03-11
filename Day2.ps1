@@ -1,6 +1,5 @@
-#This is solution for day 1.
+#This is solution for day 2
 #Created by Rodrigo Ribeiro Gomes
-#This new version attemps avoid repetitie
 
 #Stops on error!
 $ErrorActionPreference="Stop";
