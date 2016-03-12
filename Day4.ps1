@@ -25,7 +25,7 @@ do{
 	$MD5Hash 	= $md5.ComputeHash([System.Text.Encoding]::UTF8.GetBytes($ToHash)) 
 	
 	$startsWithZero = $false;
-	if($MD5Hash[0] -eq 0 -and $MD5Hash[1] -eq 0 -and $MD5Hash[2] -le 15){
+	if($MD5Hash[0] -eq 0 -and $MD5Hash[1] -eq 0 -and $MD5Hash[2] -eq 0){ #Changed last comparison to support part 2. Original right is 15
 		$startsWithZero = $true;
 	}
 	
