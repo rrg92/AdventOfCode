@@ -35,7 +35,7 @@ Function VisitHouse {
 	return 0;
 }
 
-#Visit the house 0 becausa it our start location!
+#Visit the house 0 because it our start location!
 $VISITORS = @{
 	SANTA = @{X=0;Y=0}
 	ROBOT = @{X=0;Y=0}
@@ -44,13 +44,16 @@ VisitHouse -X $VISITORS.SANTA.X  -Y $VISITORS.SANTA.X; #SANTA
 VisitHouse -X $VISITORS.ROBOT.X  -Y $VISITORS.ROBOT.Y; #ROBOT
 $VisitedHouseCount = 1;
 
-$Vistors = @($VISITORS.Keys | %{$_})
+#Generate a list of visitors!
+$VisitorsNames = @($VISITORS.Keys | %{$_})
+#Indicates current visitor index!
 $CurrentVisitor = 0;
 
 #Start the fun! For each char in input data, thar represent the directions...
 $InputData.toCharArray() | %{
 	
-	$CURRENT_VISTOR = $VISITORS[$Vistors[$CurrentVisitor]];
+	#Choose the visitor based on current visitor index.
+	$CURRENT_VISTOR = $VISITORS[$VisitorsNames[$CurrentVisitor]];
 	
 	switch($_){
 		"^" {
@@ -68,6 +71,7 @@ $InputData.toCharArray() | %{
 	}
 	
 	$VisitedHouseCount += VisitHouse -X $CURRENT_VISTOR.X  -Y $CURRENT_VISTOR.Y;
+	#Inverts current visitor!
 	$CurrentVisitor = [int]-not([bool]$CurrentVisitor)
 }
 
