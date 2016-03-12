@@ -1,5 +1,6 @@
 #This is solution for day 3
 #Created by Rodrigo Ribeiro Gomes
+#This is a translation from C# of lutcim code: https://github.com/luticm/AdventOfCode/blob/master/AdventofCode/AdventofCode/Day3.cs
 
 #Stops on error!
 $ErrorActionPreference="Stop";
