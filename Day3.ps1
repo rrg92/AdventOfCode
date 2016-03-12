@@ -36,30 +36,39 @@ Function VisitHouse {
 }
 
 #Visit the house 0 becausa it our start location!
-$CurrentX = 0
-$CurrentY = 0;
-VisitHouse -X $CurrentX  -Y $CurrentY;
+$VISITORS = @{
+	SANTA = @{X=0;Y=0}
+	ROBOT = @{X=0;Y=0}
+}
+VisitHouse -X $VISITORS.SANTA.X  -Y $VISITORS.SANTA.X; #SANTA
+VisitHouse -X $VISITORS.ROBOT.X  -Y $VISITORS.ROBOT.Y; #ROBOT
 $VisitedHouseCount = 1;
+
+$Vistors = @($VISITORS.Keys | %{$_})
+$CurrentVisitor = 0;
 
 #Start the fun! For each char in input data, thar represent the directions...
 $InputData.toCharArray() | %{
 	
+	$CURRENT_VISTOR = $VISITORS[$Vistors[$CurrentVisitor]];
+	
 	switch($_){
 		"^" {
-			$CurrentY++;
+			$CURRENT_VISTOR.Y++;
 		}
 		"V" {
-			$CurrentY--;
+			$CURRENT_VISTOR.Y--;
 		}
 		">" {
-			$CurrentX++;
+			$CURRENT_VISTOR.X++;
 		}
 		"<" {
-			$CurrentX--;
+			$CURRENT_VISTOR.X--;
 		}
 	}
 	
-	$VisitedHouseCount += VisitHouse -X $CurrentX  -Y $CurrentY;
+	$VisitedHouseCount += VisitHouse -X $CURRENT_VISTOR.X  -Y $CURRENT_VISTOR.Y;
+	$CurrentVisitor = [int]-not([bool]$CurrentVisitor)
 }
 
 #Prints house info! Because a house only exists if receive a present, then, all HOUSE have a least one present!
