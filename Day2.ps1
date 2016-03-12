@@ -14,6 +14,7 @@ set-location (Split-Path -Parent $MyInvocation.MyCommand.Definition )
 $InputData = Get-Content Day2Input.txt
 
 $TotalSquareFeet = 0;
+$TotalRibbonFeet = 0;
 
 #Foreach line (each present dimenstion)
 $InputData | %{
@@ -32,10 +33,18 @@ $InputData | %{
 	#Calculates total area.
 	$area = 2*$lw + 2*$wh + 2*$hl;
 	
+
 	#Calculate smallest area
 	$smallestArea = @($lw,$wh,$hl | sort)[0];
 	
 	$TotalSquareFeet += $area + $smallestArea;
+	
+	#For part 2: Get the 2 smallest metrics and calculates the feet to wrap the present... 
+	$smallestMetrics = @($l,$w,$h | sort | select -first 2)
+	$feetRibonForPresent = $smallestMetrics[0]*2 + $smallestMetrics[1]*2
+	$feetRibbonForBow = $l*$w*$h;
+	$TotalRibbonFeet += $feetRibonForPresent + $feetRibbonForBow;
 }
 
 write-host "total square feet: $TotalSquareFeet"
+write-host "total feet of ribbon: $TotalRibbonFeet"
