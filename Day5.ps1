@@ -1,5 +1,7 @@
 #This is solution for day 5
 #Created by Rodrigo Ribeiro Gomes
+[CmdLetBinding()]
+param()
 
 #Stops on error!
 $ErrorActionPreference="Stop";
@@ -19,6 +21,12 @@ $TESTS = @{
 	MINIMUM_VOWEL = {$_ -match '(.*[aeiou].*){3,}'}
 	DOUBLE_LETTER = {$_ -match '([a-z])\1'}
 	DISALLOWED 	= {-not($_ -match 'ab|cd|pq|xy')}
+}
+
+#New rules, for PART 2
+$TESTS = @{
+	NOOVERLAP_PAIR = {$_ -match '.*([a-z]{2}).*\1.*'}
+	INTRUSE_REPEAT = {$_ -match '([a-z])[a-z]\1' }
 }
 
 #Lets generate a array with all tests name, for iterate over it!
@@ -44,6 +52,8 @@ $InputData | %{
 		#We call the test script passing current string in a pipeline. Inside of test script, it will be accessed by special variable $_
 		#The result of script is compared with partial result. If result was false, then, partial result will be false...
 		$TestsResult = $TestsResult -band ($CurrentString | % {. $TESTS[$CurrentTest] });
+		
+		write-verbose "STRING: $CurrentString TEST: $CurrentTest RESULT: $TestsResult"
 	}
 	
 	#At this point, the partial result represent final result. If it is true, all testes was sucessfully (the string meets the requeriments for be nice!)
